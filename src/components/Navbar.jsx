@@ -15,7 +15,7 @@ export default function Navbar() {
                         <li className="nav-item me-auto ms-1">
                             <Link to="oferty" className="nav-link">Oferty pracy</Link>
                         </li>
-                        <Dropdown text="Moje konto" align="dropdown-menu-end">
+                        <Dropdown text="Moje konto" align="dropdown-menu-end" btnClassName="btn-secondary">
                             <li><Link to="login" className="btn rounded-pill w-100 btn-secondary">Zaloguj się</Link></li>
                             <p className="mt-2 mb-1">Nie masz jeszcze konta?</p>
                             <li><Link to="rejstracja" className="btn rounded-pill w-100 btn-secondary">Zarejestruj się</Link></li>
