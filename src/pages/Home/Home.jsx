@@ -6,7 +6,7 @@ export default function Home() {
     return (
         <div className="bg-body-secondary min-vh-100">
             <Navbar/>
-            <div className="container pb-5">
+            <div className="container-md pb-5">
                 <Banner/>
                 <Search/>
             </div>

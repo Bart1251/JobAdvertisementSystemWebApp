@@ -6,12 +6,14 @@ import ReactDOM from 'react-dom/client'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home/Home"
 import NotFound from "./pages/NotFound"
+import Offer from "./pages/Offer/Offer"
 
 export default function App() {
     return (
       <BrowserRouter>
         <Routes>
             <Route index element={<Home/>}/>
+            <Route path='Offer' element={<Offer/>}/>
             <Route path='*' element={<NotFound/>}/>
         </Routes>
       </BrowserRouter>
