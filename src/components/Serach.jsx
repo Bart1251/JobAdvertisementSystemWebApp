@@ -3,14 +3,45 @@ import Dropdown from "./Dropdown"
 export default function Search() {
     return (
         <form className="bg-light-subtle shadow rounded m-sm-5 p-4">
-            <div className="row mb-4">
-                <div className="col-12 col-xl-4 p-0">
+            <div className="row mb-4 d-xl-flex d-none">
+                <div className=" col-4 p-0">
+                    <div className="form-floating">
+                        <input type="text" className="form-control rounded-end-0" id="floatingInput1" placeholder=""/>
+                        <label htmlFor="floatingInput">Stanowisko, firma, słowo kluczowe</label>
+                    </div>
+                </div>
+                <div className=" col-3 p-0">
+                    <div className="form-floating">
+                        <select className="form-select h-100 p-3 rounded-0">
+                            <option>Kategoria</option>
+                            <option value="1">One</option>
+                        </select>
+                    </div>
+                </div>
+                <div className="col-3 p-0">
+                    <div className="form-floating">
+                        <input type="text" className="form-control rounded-0" id="floatingInput2" placeholder=""/>
+                        <label htmlFor="floatingInput">Lokalizacja</label>
+                    </div>
+                </div>
+                <div className="col-2 p-0">
+                    <div className="input-group h-100">
+                        <div className="form-floating">
+                            <input type="text" className="form-control rounded-0" id="floatingInput3" defaultValue="30" placeholder=""/>
+                            <label htmlFor="floatingInput">Odległość</label>
+                        </div>
+                        <button className="btn btn-outline-secondary border-secondary-subtle disabled">KM</button>
+                    </div>
+                </div>
+            </div>
+            <div className="row mb-4 d-xl-none">
+                <div className="col-12 p-1">
                     <div className="form-floating">
                         <input type="text" className="form-control" id="floatingInput1" placeholder=""/>
                         <label htmlFor="floatingInput">Stanowisko, firma, słowo kluczowe</label>
                     </div>
                 </div>
-                <div className="col-12 col-xl-3 p-0">
+                <div className="col-12 p-1">
                     <div className="form-floating">
                         <select className="form-select h-100 p-3">
                             <option>Kategoria</option>
@@ -18,13 +49,13 @@ export default function Search() {
                         </select>
                     </div>
                 </div>
-                <div className="col-12 col-xl-3 p-0">
+                <div className="col-12 p-1">
                     <div className="form-floating">
                         <input type="text" className="form-control" id="floatingInput2" placeholder=""/>
                         <label htmlFor="floatingInput">Lokalizacja</label>
                     </div>
                 </div>
-                <div className="col-12 col-xl-2 p-0">
+                <div className="col-12 p-1">
                     <div className="input-group h-100">
                         <div className="form-floating">
                             <input type="text" className="form-control" id="floatingInput3" defaultValue="30" placeholder=""/>
@@ -34,6 +65,7 @@ export default function Search() {
                     </div>
                 </div>
             </div>
+            
             <div className="row w-100">
                 <div className="col-xl-auto col-md-6 p-3">
                     <Dropdown text="Poziom stanowiska" btnClassName="btn-outline-secondary w-100"/>
