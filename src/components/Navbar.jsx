@@ -16,9 +16,9 @@ export default function Navbar() {
                             <Link to="/oferty" className="nav-link">Oferty pracy</Link>
                         </li>
                         <Dropdown text="Moje konto" align="dropdown-menu-end" btnClassName="btn-secondary">
-                            <li><Link to="/login" className="btn rounded-pill w-100 btn-secondary">Zaloguj się</Link></li>
+                            <li><Link to="/Login" className="btn rounded-pill w-100 btn-secondary">Zaloguj się</Link></li>
                             <p className="mt-2 mb-1">Nie masz jeszcze konta?</p>
-                            <li><Link to="/rejstracja" className="btn rounded-pill w-100 btn-secondary">Zarejestruj się</Link></li>
+                            <li><Link to="/Register" className="btn rounded-pill w-100 btn-secondary">Zarejestruj się</Link></li>
                         </Dropdown>
                     </ul>
                 </div>

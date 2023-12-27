@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home/Home"
 import NotFound from "./pages/NotFound"
 import Offer from "./pages/Offer/Offer"
+import Profile from './pages/Profile/Profile';
 
 export default function App() {
     return (
@@ -14,6 +15,7 @@ export default function App() {
         <Routes>
             <Route index element={<Home/>}/>
             <Route path='Offer' element={<Offer/>}/>
+            <Route path='Profile' element={<Profile/>}/>
             <Route path='*' element={<NotFound/>}/>
         </Routes>
       </BrowserRouter>
