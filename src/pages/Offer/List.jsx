@@ -1,4 +1,4 @@
-import InfoItemIcon from "./InfoItemIcon";
+import InfoItemIcon from "../../components/InfoItemIcon";
 
 
 export default function List(props) {

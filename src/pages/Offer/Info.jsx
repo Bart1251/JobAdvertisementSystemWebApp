@@ -1,5 +1,5 @@
-import InfoItemIcon from "./InfoItemIcon";
-import InfoItemText from "./InfoItemText";
+import InfoItemIcon from "../../components/InfoItemIcon";
+import InfoItemText from "../../components/InfoItemText";
 
 
 export default function Info() {

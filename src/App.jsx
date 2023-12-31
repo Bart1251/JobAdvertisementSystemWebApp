@@ -8,6 +8,7 @@ import Home from "./pages/Home/Home"
 import NotFound from "./pages/NotFound"
 import Offer from "./pages/Offer/Offer"
 import Profile from './pages/Profile/Profile';
+import "./styles.css"
 
 export default function App() {
     return (

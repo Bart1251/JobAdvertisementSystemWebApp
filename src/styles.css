@@ -1,0 +1,16 @@
+.navbar + * {
+    margin-top: 62px!important;
+}
+
+.sidebar {
+    top: 0;
+    padding-top: 62px!important;
+    height: 100vh;
+    overflow-y: 'auto';
+}
+
+@media (min-width: 992px) { 
+    .fs-lg-6 {
+        font-size: 16px!important; 
+    }
+}

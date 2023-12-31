@@ -4,7 +4,7 @@ import Dropdown from "./Dropdown";
 
 export default function Navbar() {
     return (
-        <nav className="navbar navbar-expand-sm bg-white shadow fs-5">
+        <nav className="navbar navbar-expand-sm bg-white shadow fs-5 z-3 fixed-top">
             <div className="container">
                 <Link className="navbar-brand" to="/">Job Navigator</Link>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
