@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
+import { useContext } from "react";
 import Dropdown from "./Dropdown";
-
+import UserContext from '../contexts/UserContext'
 
 export default function Navbar() {
+    let {user} = useContext(UserContext)
     return (
         <nav className="navbar navbar-expand-sm bg-white shadow fs-5 z-3 fixed-top">
             <div className="container">
@@ -15,11 +17,14 @@ export default function Navbar() {
                         <li className="nav-item me-auto ms-1">
                             <Link to="/oferty" className="nav-link">Oferty pracy</Link>
                         </li>
+                        {user == null && 
                         <Dropdown text="Moje konto" align="dropdown-menu-end" btnClassName="btn-secondary">
                             <li><Link to="/Login" className="btn rounded-pill w-100 btn-secondary">Zaloguj się</Link></li>
                             <p className="mt-2 mb-1">Nie masz jeszcze konta?</p>
                             <li><Link to="/Register" className="btn rounded-pill w-100 btn-secondary">Zarejestruj się</Link></li>
-                        </Dropdown>
+                        </Dropdown>}
+                        {user != null &&
+                        <Link to="/Profile" className="btn rounded-pill btn-secondary ps-3 pe-3 m-1">Moje konto</Link>}
                     </ul>
                 </div>
             </div>

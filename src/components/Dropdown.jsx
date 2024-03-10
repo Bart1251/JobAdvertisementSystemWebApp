@@ -2,7 +2,7 @@
 
 export default function Dropdown(props) {
     return (
-        <div className={"dropdown " + props.className}>
+        <div className={"dropdown m-1 " + props.className}>
             <button type="button" className={"btn rounded-pill ps-3 pe-3 dropdown-toggle " + props.btnClassName} data-bs-toggle="dropdown" aria-expanded="false">
                 {props.text}
             </button>
@@ -14,5 +14,5 @@ export default function Dropdown(props) {
 }
 
 //props:
-//align - to where dropdown snaps; exampe: dropdown-menu-end
+//align - to where dropdown snaps; example: dropdown-menu-end
 //text - dropdown toggle text
