@@ -3,65 +3,68 @@ import CourseItem from "./CourseItem"
 import EducationItem from "./EducationItem"
 import WorkingExperienceItem from "./WorkingExperienceItem"
 
-export default function ProfileInfo() {
+export default function ProfileInfo({ userInfo, jobExperiences, educations, languages, skills, courses, profiles }) {
     return (
        <div className="m-2 m-lg-5">
-            <h2>Jan Nowak</h2>
-            <p className="fs-5">Zawodowiec</p>
-            <p>Jestem programistą full-stack, programowaniem zajmuję się od x lat…</p>
+            <h2>{`${userInfo.first_name} ${userInfo.last_name}`}</h2>
+            <p className="fs-5">{userInfo.occupation}</p>
+            <p>{userInfo.description}</p>
             <hr/>
             <div className="col-xl-6">
-                <InfoItemText title="Data urodzenia: " text="12.01.2000"/>
-                <InfoItemText title="Adres: " text="ul. Długa 12 02-969 Warszawa"/>
-                <InfoItemText title="Telefon: " text="123 123 123"/>
-                <InfoItemText title="Email: " text="example@gmail.com"/>
+                <InfoItemText title="Data urodzenia: " text={userInfo.date_of_birth}/>
+                <InfoItemText title="Adres: " text={userInfo.address}/>
+                <InfoItemText title="Telefon: " text={userInfo.phone_number}/>
+                <InfoItemText title="Email: " text={userInfo.email}/>
             </div>
             <hr/>
-            <div>
-                <h4>Aktualne stanowisko</h4>
-                <p>Maecenas aliquam, est eget consectetur vehicula, nulla nulla lobortis mauris, et porttitor mi neque sed justo. Morbi tincidunt ullamcorper efficitur. Vivamus mollis blandit diam vel tempor. Nullam et ullamcorper orci. Cras vel dolor elementum, luctus arcu quis, blandit nibh. Mauris in dolor magna. Sed aliquam nisl justo, in cursus nibh euismod vitae.</p>
-            </div>
-            <hr/>
-            <div>
-                <h4>Doświadczenie zawdowe</h4>
-                <WorkingExperienceItem start="12.12.1231" end="31.12.2314" position="Elektryk" company="Elektro-Tech" location="Warszawa" responsibilities={["fasdasdasda", "dasfafasdfa", "fasafdsfdasfsda"]}/>
-                <WorkingExperienceItem start="12.12.1231" end="31.12.2314" position="Elektryk" company="Elektro-Tech" location="Warszawa" responsibilities={["fasdasdasda", "dasfafasdfa", "fasafdsfdasfsda"]}/>
-            </div>
-            <hr/>
-            <div>
-                <h4>Wykształcenie</h4>
-                <EducationItem start="12.12.1231" end="31.12.2314" location="Warszawa" institution="Politechnika Warszawska" fieldOfStudy="Technika wysokich napięć" educationLevel="Wyższe"/>
-                <EducationItem start="12.12.1231" end="31.12.2314" location="Warszawa" institution="Politechnika Warszawska" fieldOfStudy="Technika wysokich napięć" educationLevel="Wyższe"/>
-            </div>
-            <hr/>
-            <div>
-                <h4>Znajomość języków</h4>
-                <ul>
-                    <li>Angielski C2</li>
-                    <li>Niemiecki B2</li>
-                    <li>Francuski A2</li>
-                </ul>
-            </div>
-            <hr/>
-            <div>
-                <h4>Umiejętności</h4>
-                <ul>
-                    <li>Prawo jazdy kat. B</li>
-                    <li>Obsługa pakietu Office</li>
-                </ul>
-            </div>
-            <hr/>
-            <div>
-                <h4>Kursy i szkolenia</h4>
-                <CourseItem start="12.12.1231" end="31.12.2314" name="Kurs pierwszej pomocy" organizer="Same Kursy"/>
-            </div>
-            <hr/>
-            <div>
-                <h4>Linki</h4>
-                <ul>
-                    <li>https://github.com/Bart1251</li>
-                </ul>
-            </div>
+            {userInfo.current_job_description && <>
+                <div>
+                    <h4>Aktualne stanowisko</h4>
+                    <p>{userInfo.current_job_description}</p>
+                </div>
+                <hr/>
+            </>}
+            {jobExperiences && <>
+                <div>
+                    <h4>Doświadczenie zawdowe</h4>
+                    {jobExperiences.map(e => <WorkingExperienceItem key={e.job_experience_id} start={e.period_of_employment_start} end={e.period_of_employment_end} position={e.position} company={e.company} location={e.location} responsibilities={e.responsibilities}/>)}
+                </div>
+                <hr/>
+            </>}
+            {educations && <>
+                <div>
+                    <h4>Wykształcenie</h4>
+                    {educations.map(e => <EducationItem key={e.education_id} start={e.period_of_education_start} end={e.period_of_education_end} location={e.town} institution={e.institution_name} fieldOfStudy={e.field_of_study} educationLevel={e.level}/>)}
+                </div>
+                <hr/>
+            </>}
+            {languages && <>
+                <div>
+                    <h4>Znajomość języków</h4>
+                    <ul>{languages.map(e => <li key={e.user_language_id}>{e.language + " " + e.level}</li>)}</ul>
+                </div>
+                <hr/>
+            </>}
+            {skills && <>
+                <div>
+                    <h4>Umiejętności</h4>
+                    <ul>{skills.map(e => <li key={e.skill_id}>{e.skill}</li>)}</ul>
+                </div>
+                <hr/>
+            </>}
+            {courses && <>
+                <div>
+                    <h4>Kursy i szkolenia</h4>
+                    {courses.map(e => <CourseItem key={e.course_id} start={e.course_start} end={e.course_end} name={e.course} organizer={e.organizer}/>)}
+                </div>
+                <hr/>
+            </>}
+            {profiles && <>
+                <div>
+                    <h4>Linki</h4>
+                    <ul>{profiles.map(e => <li key={e.profile_id}>{e.link}</li>)}</ul>
+                </div>
+            </>}
        </div> 
     )
 }

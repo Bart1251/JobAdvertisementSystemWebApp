@@ -1,8 +1,7 @@
-import { useContext } from 'react'
-import UserContext from '../../contexts/UserContext'
+import { useUser } from '../../contexts/UserContext'
 
 export default function Logout() {
-    let {logoutUser} = useContext(UserContext)
+    const { logoutUser } = useUser();
     logoutUser()
     return (<></>)
 }

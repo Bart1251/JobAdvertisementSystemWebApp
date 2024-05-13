@@ -1,10 +1,9 @@
 import { Link } from "react-router-dom";
-import { useContext } from "react";
 import Dropdown from "./Dropdown";
-import UserContext from '../contexts/UserContext'
+import { useUser } from '../contexts/UserContext'
 
 export default function Navbar() {
-    let {user} = useContext(UserContext)
+    const {user} = useUser();
     return (
         <nav className="navbar navbar-expand-sm bg-white shadow fs-5 z-3 fixed-top">
             <div className="container">
