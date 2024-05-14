@@ -58,9 +58,9 @@ export default function JobExperienceSettings({ jobExperiencesSet, jobExperience
                 return updatedState;
             } else if (name == "period_of_employment_start" || name == "period_of_employment_end") {
                 if (value == "0000-00-00" || value == "") {
-                    updatedState[updatedState.findIndex(se => se.job_experience_id == key)][name] = null;
+                    updatedState[-(key + 1)][name] = null;
                 } else {
-                    updatedState[updatedState.findIndex(se => se.job_experience_id == key)][name] = value;
+                    updatedState[-(key + 1)][name] = value;
                 }
                 return updatedState;
             } else {
