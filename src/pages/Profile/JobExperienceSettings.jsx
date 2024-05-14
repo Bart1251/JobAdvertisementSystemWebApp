@@ -101,6 +101,7 @@ export default function JobExperienceSettings({ jobExperiencesSet, jobExperience
             updatedState[updatedState.findIndex(se => se.id == key)].responsibilities.splice(-(parseInt(e.target.previousElementSibling.getAttribute('data-key')) + 1), 1);
             return updatedState;
         });
+        setJobExperienceErrors([[], false]);
     }
 
     function deleteResponsibility(e) {
@@ -111,6 +112,7 @@ export default function JobExperienceSettings({ jobExperiencesSet, jobExperience
             setJobExperiencesResponsibilitiesToDelete(prevState => { return [...prevState, parseInt(e.target.previousElementSibling.getAttribute('data-key'))]});
             return updatedState;
         });
+        setJobExperienceErrors([[], false]);
     }
 
     function deleteJobExperience(e) {
@@ -121,6 +123,7 @@ export default function JobExperienceSettings({ jobExperiencesSet, jobExperience
             updatedState.splice(updatedState.findIndex(se => se.job_experience_id == key), 1);
             return updatedState;
         });
+        setJobExperienceErrors([[], false]);
     }
 
     function deleteNewJobExperienceResponsibility(e) {
@@ -130,6 +133,7 @@ export default function JobExperienceSettings({ jobExperiencesSet, jobExperience
             updatedState[-(key + 1)].responsibilities.splice(parseInt(e.target.previousElementSibling.getAttribute('data-key')), 1);
             return updatedState;
         });
+        setNewJobExperienceErrors([[], false]);
     }
 
     function deleteNewJobExperience(e) {
@@ -139,6 +143,7 @@ export default function JobExperienceSettings({ jobExperiencesSet, jobExperience
             updatedState.splice(-(key + 1), 1);
             return updatedState;
         });
+        setNewJobExperienceErrors([[], false]);
     }
 
     function findKey(parent) {
@@ -149,16 +154,16 @@ export default function JobExperienceSettings({ jobExperiencesSet, jobExperience
     }
 
     const jobExperienceRegexes = {
-        position: /^[A-Za-z]+(?:[-' ][A-Za-z]+)*$/,
-        company: /^[A-Za-z]+(?:[-' ][A-Za-z]+)*$/,
-        location: /^[a-zA-Z0-9\s,'-]+$/,
+        position: /^[A-Za-ząćęłńóśźżĄĆĘŁŃÓŚŹŻ]+(?:[-' ][A-Za-z]+)*$/,
+        company: /^[A-Za-ząćęłńóśźżĄĆĘŁŃÓŚŹŻ]+(?:[-' ][A-Za-z]+)*$/,
+        location: /^[A-Za-ząćęłńóśźżĄĆĘŁŃÓŚŹŻ0-9\s,'-]+$/,
         period_of_employment_start: /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/,
         responsibilities: { responsibility: /^[\w\s.,!?;:'"-]{1,300}$/ },
     };
     const newJobExperienceRegexes = {
-        position: /^[A-Za-z]+(?:[-' ][A-Za-z]+)*$/,
-        company: /^[A-Za-z]+(?:[-' ][A-Za-z]+)*$/,
-        location: /^[a-zA-Z0-9\s,'-]+$/,
+        position: /^[A-Za-ząćęłńóśźżĄĆĘŁŃÓŚŹŻ]+(?:[-' ][A-Za-z]+)*$/,
+        company: /^[A-Za-ząćęłńóśźżĄĆĘŁŃÓŚŹŻ]+(?:[-' ][A-Za-z]+)*$/,
+        location: /^[A-Za-ząćęłńóśźżĄĆĘŁŃÓŚŹŻ0-9\s,'-]+$/,
         period_of_employment_start: /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/,
         responsibilities: /^[\w\s.,!?;:'"-]{1,300}$/,
     };
@@ -264,7 +269,7 @@ export default function JobExperienceSettings({ jobExperiencesSet, jobExperience
         <form className="mt-5" onSubmit={saveJobExperiences}>
             <div className="d-flex gap-3">
                 <h4>Doświadczenie zawodowe</h4>
-                <input type="button" value="Nowe" className="btn btn-primary" style={{transform: "TranslateY(-7px)"}} onClick={addJobExperience}/>
+                <input type="button" value="Nowy" className="btn btn-primary" style={{transform: "TranslateY(-7px)"}} onClick={addJobExperience}/>
             </div>
             {newJobExperiences.map((e, i) => { return (
             <div key={-i - 1} data-key={-i - 1} className={`${i > 0 ? 'my-5' : 'mb-5'}`}>
@@ -313,7 +318,7 @@ export default function JobExperienceSettings({ jobExperiencesSet, jobExperience
             </div>)})}
             {jobExperiences.map((e, i) => { return (
             <div key={e.job_experience_id} data-key={e.job_experience_id} className={`${i > 0 || newJobExperiences.length > 0 ? 'my-5' : 'mb-5'}`}>
-                {i > 0 && <hr/>}
+                {(i > 0 || newJobExperiences.length > 0) && <hr/>}
                 <div className="row">
                     <div className="col-md-6 col-12">
                         <label htmlFor="position" className="form-label">Stanowisko</label>

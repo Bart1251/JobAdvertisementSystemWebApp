@@ -15,13 +15,16 @@ export default function Profile() {
     const { apiRequest } = useApi();
     const [userInfo, setUserInfo] = useState(null);
     const [jobExperiences, setJobExperiences] = useState(null);
-    const [educations, setEcucations] = useState(null);
-    const [languages, setLanguages] = useState(null);
+    const [educations, setEducations] = useState(null);
+    const [userLanguages, setUserLanguages] = useState(null);
     const [skills, setSkills] = useState(null);
     const [courses, setCourses] = useState(null);
     const [profiles, setProfiles] = useState(null);
     const [profilePicture, setProfilePicture] = useState(img);
     const [files, setFiles] = useState(null);
+    const [educationLevels, setEducationLevels] = useState(null);
+    const [languages, setLanguages] = useState(null);
+    const [languageLevels, setLanguageLevels] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -30,24 +33,30 @@ export default function Profile() {
             const userInfoData = await apiRequest(`http://127.0.0.1/user/${user}`, "GET");
             const jobExperiencesData = await apiRequest(`http://127.0.0.1/jobExperience/${user}`, "GET");
             const educationsData = await apiRequest(`http://127.0.0.1/education/${user}`, "GET");
-            const languagesData = await apiRequest(`http://127.0.0.1/language/${user}`, "GET");
+            const userLanguagesData = await apiRequest(`http://127.0.0.1/userLanguage/${user}`, "GET");
             const skillsData = await apiRequest(`http://127.0.0.1/skill/${user}`, "GET");
             const coursesData = await apiRequest(`http://127.0.0.1/course/${user}`, "GET");
             const profilesData = await apiRequest(`http://127.0.0.1/profile/${user}`, "GET");
             const profilePictureData = await apiRequest(`http://127.0.0.1/profilePicture/${user}`, "GET", null, {}, true);
             const filesData = await apiRequest(`http://127.0.0.1/file/${user}`, "GET");
+            const educationLevelsData = await apiRequest(`http://127.0.0.1/educationLevel`, "GET");
+            const languagesData = await apiRequest(`http://127.0.0.1/language`, "GET");
+            const languageLevelsData = await apiRequest(`http://127.0.0.1/languageLevel`, "GET");
             
             if (userInfoData) {
                 setUserInfo(userInfoData);
                 setJobExperiences(jobExperiencesData);
-                setEcucations(educationsData);
-                setLanguages(languagesData);
+                setEducations(educationsData);
+                setUserLanguages(userLanguagesData);
                 setSkills(skillsData);
                 setCourses(coursesData);
                 setProfiles(profilesData);
                 if(profilePictureData)
                     setProfilePicture(profilePictureData);
                 setFiles(filesData);
+                setEducationLevels(educationLevelsData);
+                setLanguages(languagesData);
+                setLanguageLevels(languageLevelsData);
                 setLoading(false);
             } else {
                 setError("Nie udało się wczytać zawartości strony");
@@ -84,11 +93,11 @@ export default function Profile() {
                 </div>
                 <div className="offset-lg-3 col-lg-9 offset-2 col-10">
                     <Routes>
-                        <Route index element={<ProfileInfo userInfo={userInfo} jobExperiences={jobExperiences} educations={educations} languages={languages} skills={skills} courses={courses} profiles={profiles}/>} />
+                        <Route index element={<ProfileInfo userInfo={userInfo} jobExperiences={jobExperiences} educations={educations} languages={userLanguages} skills={skills} courses={courses} profiles={profiles}/>} />
                         <Route path="saved" element={<SavedOffers />} />
                         <Route path="applications" element={<MyApplications />} />
                         <Route path="documents" element={<Documents files={files} setFiles={setFiles}/>} />
-                        <Route path="settings" element={<Settings userInfoSet={userInfo} jobExperiencesSet={jobExperiences} educationsSet={educations} languagesSet={languages} skillsSet={skills} coursesSet={courses} profilesSet={profiles} stateSetters={{userInfo: setUserInfo, jobExperiences: setJobExperiences}}/>} />
+                        <Route path="settings" element={<Settings userInfoSet={userInfo} jobExperiencesSet={jobExperiences} educationsSet={educations} languagesSet={userLanguages} skillsSet={skills} coursesSet={courses} profilesSet={profiles} stateSetters={{userInfo: setUserInfo, jobExperiences: setJobExperiences, educations: setEducations, languages: setUserLanguages}} educationLevels={educationLevels} languages={languages} languageLevels={languageLevels}/>} />
                     </Routes>
                 </div>
             </div>

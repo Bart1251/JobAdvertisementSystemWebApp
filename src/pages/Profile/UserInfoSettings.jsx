@@ -19,11 +19,11 @@ export default function UserInfoSettings({ userInfoSet, userInfoSetter }) {
     }
 
     const userInfoRegexes = {
-        first_name: /^[A-Za-z]+$/,
-        last_name: /^[A-Za-z]+(?:[-' ][A-Za-z]+)*$/,
-        occupation: /^[A-Za-z]+(?:[-' ][A-Za-z]+)*$/,
+        first_name: /^[A-Za-ząćęłńóśźżĄĆĘŁŃÓŚŹŻ]+$/,
+        last_name: /^[A-Za-ząćęłńóśźżĄĆĘŁŃÓŚŹŻ]+(?:[-' ][A-Za-ząćęłńóśźżĄĆĘŁŃÓŚŹŻ]+)*$/,
+        occupation: /^[A-Za-ząćęłńóśźżĄĆĘŁŃÓŚŹŻ]+(?:[-' ][A-Za-ząćęłńóśźżĄĆĘŁŃÓŚŹŻ]+)*$/,
         date_of_birth: /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/,
-        address: /^[a-zA-Z0-9\s,'-]+$/,
+        address: /^[A-Za-ząćęłńóśźżĄĆĘŁŃÓŚŹŻ0-9\s,'-]+$/,
         phone_number: /^\+?(\d{1,3})[-. ]?(\d{1,3})[-. ]?(\d{1,4})[-. ]?(\d{1,4})$/,
         email: /^[\w\.-]+@[\w\.-]+\.\w{2,}$/,
         description: /^[\w\s.,!?;:'"-]{1,500}$/,
