@@ -8,10 +8,10 @@ export default function JobExperienceSettings({ jobExperiencesSet, jobExperience
     const { apiRequest } = useApi();
     const { validateArrayFields } = useValidation();
     const [jobExperiences, setJobExperiences] = useState(jobExperiencesSet ? jobExperiencesSet : []);
-    const [jobExperienceNewResponsibilities, setJobExperienceNewResponsibilities] = useState(jobExperiencesSet.map(e => {return {id: e.job_experience_id, responsibilities: []}}));
+    const [jobExperienceNewResponsibilities, setJobExperienceNewResponsibilities] = useState(jobExperiencesSet ? jobExperiencesSet.map(e => {return {id: e.job_experience_id, responsibilities: []}}) : []);
     const [newJobExperiences, setNewJobExperiences] = useState([]);
     const [jobExperiencesToDelete, setJobExperiencesToDelete] = useState([]);
-    const [jobExperiencesResponsibilitiesToDelete, setJobExperiencesResponsibilitiesToDelete] = useState(jobExperiencesSet.map(e => {return {id: e.job_experience_id, responsibilities: []}}));
+    const [jobExperiencesResponsibilitiesToDelete, setJobExperiencesResponsibilitiesToDelete] = useState(jobExperiencesSet ? jobExperiencesSet.map(e => {return {id: e.job_experience_id, responsibilities: []}}) : []);
     const [jobExperienceErrors, setJobExperienceErrors] = useState([[], false]);
     const [newJobExperienceErrors, setNewJobExperienceErrors] = useState([[], false]);
     const [jobExperienceNewResponsibilitiesErrors, setJobExperienceNewResponsibilitiesErrors] = useState([[], false]);
