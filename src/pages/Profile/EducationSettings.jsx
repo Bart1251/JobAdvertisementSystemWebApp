@@ -132,7 +132,7 @@ export default function EducationSettings({ educationsSet, educationsSetter, edu
             educationsToDelete.forEach(async se => {
                 await apiRequest(`http://127.0.0.1/education/${se}`, "DELETE");
             });
-            const allEducations = await apiRequest(`http://127.0.0.1/education/${user}`, "GET", null, {'Cache-Control': 'no-cache'});
+            const allEducations = await apiRequest(`http://127.0.0.1/education/${user}`, "GET");
             educationsSetter(allEducations);
             setEducations(allEducations);
             setNewEducations([]);
