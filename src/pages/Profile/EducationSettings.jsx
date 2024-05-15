@@ -51,7 +51,7 @@ export default function EducationSettings({ educationsSet, educationsSetter, edu
 
     function addEducation(e) {
         setNewEducations(prevState => {
-            return [{institution_name: "", field_of_study: "", education_level_id: educationLevels[0].education_level_id, town: "", start: null, end: null}, ...prevState];
+            return [{institution_name: "", field_of_study: "", education_level_id: educationLevels[0].education_level_id, town: "", period_of_education_start: null, period_of_education_end: null}, ...prevState];
         });
     }
 
@@ -168,8 +168,9 @@ export default function EducationSettings({ educationsSet, educationsSetter, edu
                         <select onChange={handleNewEducationChange} defaultValue={e.education_level_id} name="education_level_id" className="form-select" id="education_level_id">
                             {educationLevels.map(se => {return <option key={se.education_level_id} value={se.education_level_id}>{se.level}</option>})}
                         </select>
-
-                        <label htmlFor="town" className="form-label pt-3">Lokalizacja</label>
+                    </div>
+                    <div className="col-md-6 col-12">
+                        <label htmlFor="town" className="form-label">Lokalizacja</label>
                         <input type="text" value={e.town} onChange={handleNewEducationChange} name="town" className={`form-control ${newEducationsErrors[1] && newEducationsErrors[0][i].town ? 'is-invalid' : ''}`} id="town"/>
                         {newEducationsErrors[1] && <div className="invalid-feedback">{newEducationsErrors[0][i].town}</div>}
 
@@ -178,7 +179,7 @@ export default function EducationSettings({ educationsSet, educationsSetter, edu
                         {newEducationsErrors[1] && <div className="invalid-feedback">{newEducationsErrors[0][i].period_of_education_start}</div>}
 
                         <label htmlFor="period_of_education_end" className="form-label pt-3">Zakończenie nauki (zostaw puste jeśli nadal uczęszczasz)</label>
-                        <input type="date" value={e.end} onChange={handleNewEducationChange} name="period_of_education_end" className={`form-control ${newEducationsErrors[1] && newEducationsErrors[0][i].period_of_education_end ? 'is-invalid' : ''}`} id="period_of_education_end"/>
+                        <input type="date" value={e.period_of_education_end} onChange={handleNewEducationChange} name="period_of_education_end" className={`form-control ${newEducationsErrors[1] && newEducationsErrors[0][i].period_of_education_end ? 'is-invalid' : ''}`} id="period_of_education_end"/>
                         {newEducationsErrors[1] && <div className="invalid-feedback">{newEducationsErrors[0][i].period_of_education_end}</div>}
                     </div>
                 </div>
@@ -203,8 +204,9 @@ export default function EducationSettings({ educationsSet, educationsSetter, edu
                         <select onChange={handleEducationChange} defaultValue={e.education_level_id} name="education_level_id" className="form-select" id="education_level_id">
                             {educationLevels.map(se => {return <option key={se.education_level_id} value={se.education_level_id}>{se.level}</option>})}
                         </select>
-
-                        <label htmlFor="town" className="form-label pt-3">Lokalizacja</label>
+                    </div>
+                    <div className="col-md-6 col-12">
+                        <label htmlFor="town" className="form-label">Lokalizacja</label>
                         <input type="text" value={e.town} onChange={handleEducationChange} name="town" className={`form-control ${educationsErrors[1] && educationsErrors[0][i].town ? 'is-invalid' : ''}`} id="town"/>
                         {educationsErrors[1] && <div className="invalid-feedback">{educationsErrors[0][i].town}</div>}
 

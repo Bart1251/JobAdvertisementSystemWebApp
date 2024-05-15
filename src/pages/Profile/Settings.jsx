@@ -3,6 +3,8 @@ import JobExperienceSettings from "./JobExperienceSettings";
 import EducationSettings from "./EducationSettings";
 import LanguageSettings from "./LanguageSettings";
 import SkillSettings from "./SkillSettings";
+import CourseSettings from "./CourseSettings";
+import ProfileSettings from "./ProfileSettings";
 
 export default function Settings({ userInfoSet, jobExperiencesSet, educationsSet, languagesSet, skillsSet, coursesSet, profilesSet, stateSetters, educationLevels, languages, languageLevels }) {
     return (
@@ -17,6 +19,10 @@ export default function Settings({ userInfoSet, jobExperiencesSet, educationsSet
             <LanguageSettings languagesSet={languagesSet} languagesSetter={stateSetters.languages} languages={languages} languageLevels={languageLevels}/>
             <hr/>
             <SkillSettings skillsSet={skillsSet} skillsSetter={stateSetters.skills}/>
+            <hr/>
+            <CourseSettings coursesSet={coursesSet} coursesSetter={stateSetters.courses}/>
+            <hr/>
+            <ProfileSettings profilesSet={profilesSet} profilesSetter={stateSetters.profiles}/>
             <hr/>
        </div> 
     )

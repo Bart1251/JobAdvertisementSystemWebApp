@@ -102,7 +102,8 @@ export default function LanguageSettings({ languagesSet, languagesSetter, langua
                         <select onChange={handleNewLanguageChange} defaultValue={e.language_id} name="language_id" className="form-select" id="language_id">
                             {languages.map(se => {return <option key={se.language_id} value={se.language_id}>{se.language}</option>})}
                         </select>
-
+                    </div>
+                    <div className="col-md-6 col-12">
                         <label htmlFor="language_level_id" className="form-label pt-3">Poziom</label>
                         <select onChange={handleNewLanguageChange} defaultValue={e.language_level_id} name="language_level_id" className="form-select" id="language_level_id">
                             {languageLevels.map(se => {return <option key={se.language_level_id} value={se.language_level_id}>{se.level}</option>})}
@@ -122,7 +123,8 @@ export default function LanguageSettings({ languagesSet, languagesSetter, langua
                         <select onChange={handleLanguageChange} defaultValue={e.language_id} name="language_id" className="form-select" id="language_id">
                             {languages.map(se => {return <option key={se.language_id} value={se.language_id}>{se.language}</option>})}
                         </select>
-
+                    </div>
+                    <div className="col-md-6 col-12">
                         <label htmlFor="language_level_id" className="form-label pt-3">Poziom</label>
                         <select onChange={handleLanguageChange} defaultValue={e.language_level_id} name="language_level_id" className="form-select" id="language_level_id">
                             {languageLevels.map(se => {return <option key={se.language_level_id} value={se.language_level_id}>{se.level}</option>})}

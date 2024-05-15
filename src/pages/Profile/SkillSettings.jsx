@@ -82,7 +82,6 @@ export default function SkillSettings({ skillsSet, skillsSetter }) {
                     });
                 }),
                 newSkills.forEach(async se => {
-                    console.log(se)
                     await apiRequest(`http://127.0.0.1/skill`, "POST", {
                         user_id: user,
                         skill: se.skill,
@@ -114,9 +113,9 @@ export default function SkillSettings({ skillsSet, skillsSetter }) {
             <div className="row">
                 <div className="col-md-6 col-12">
                     <ul style={{maxHeight: 335, overflowY: "auto"}}>
-                        {newSkills.map((se, j) => { return (
-                            <li key={-j - 1} className="position-relative">
-                                <input data-key={-j - 1} type="text" value={se.skill} name="skill" onChange={handleNewSkillChange} className={`my-3 pe-5 form-control ${newSkillsErrors[1] && newSkillsErrors[0][i].skill ? 'is-invalid' : ''}`}/>
+                        {newSkills.map((se, i) => { return (
+                            <li key={-i - 1} className="position-relative">
+                                <input data-key={-i - 1} type="text" value={se.skill} name="skill" onChange={handleNewSkillChange} className={`my-3 pe-5 form-control ${newSkillsErrors[1] && newSkillsErrors[0][i].skill ? 'is-invalid' : ''}`}/>
                                 <input type="button" onClick={deleteNewSkills} className="btn-close position-absolute top-0 end-0 mt-2 me-2"/>
                                 {newSkillsErrors[1] && <div className="invalid-feedback">{newSkillsErrors[0][i].skill}</div>}
                             </li>
