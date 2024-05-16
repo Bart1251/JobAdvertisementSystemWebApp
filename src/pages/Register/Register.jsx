@@ -41,9 +41,11 @@ export default function Register() {
 
     async function submit(e) {
         e.preventDefault();
-        const [errorsTmp, hasErrors] = validateFields(data, regexes, minLenghts, maxLenghts, errorMessages);
-        if(data.password != data.password_repeat)
+        let [errorsTmp, hasErrors] = validateFields(data, regexes, minLenghts, maxLenghts, errorMessages);
+        if(data.password != data.password_repeat) {
             errorsTmp["form_password"] = "Hasła się różnią";
+            hasErrors = true;
+        }
         if(!hasErrors)
             if(!(await registerUser(data)))
                 errorsTmp["form_email"] = "Konto z podanym adresem email już istnieje";

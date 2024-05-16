@@ -26,7 +26,7 @@ export const ApiProvider = ({ children }) => {
         try {
             const response = await fetch(url, config);
             if (response.ok) {
-                if (isFile && method == "GET") {
+                if (isFile) {
                     return URL.createObjectURL(await response.blob());
                 } else {
                     if(issus)

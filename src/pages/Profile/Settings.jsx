@@ -5,6 +5,7 @@ import LanguageSettings from "./LanguageSettings";
 import SkillSettings from "./SkillSettings";
 import CourseSettings from "./CourseSettings";
 import ProfileSettings from "./ProfileSettings";
+import OtherSettings from "./OtherSettings";
 
 export default function Settings({ userInfoSet, jobExperiencesSet, educationsSet, languagesSet, skillsSet, coursesSet, profilesSet, stateSetters, educationLevels, languages, languageLevels }) {
     return (
@@ -23,6 +24,8 @@ export default function Settings({ userInfoSet, jobExperiencesSet, educationsSet
             <CourseSettings coursesSet={coursesSet} coursesSetter={stateSetters.courses}/>
             <hr/>
             <ProfileSettings profilesSet={profilesSet} profilesSetter={stateSetters.profiles}/>
+            <hr/>
+            <OtherSettings profilePictureSetter={stateSetters.profilePicture}/>
             <hr/>
        </div> 
     )

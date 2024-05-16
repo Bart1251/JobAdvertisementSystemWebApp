@@ -97,7 +97,7 @@ export default function Profile() {
                         <Route path="saved" element={<SavedOffers />} />
                         <Route path="applications" element={<MyApplications />} />
                         <Route path="documents" element={<Documents files={files} setFiles={setFiles}/>} />
-                        <Route path="settings" element={<Settings userInfoSet={userInfo} jobExperiencesSet={jobExperiences} educationsSet={educations} languagesSet={userLanguages} skillsSet={skills} coursesSet={courses} profilesSet={profiles} stateSetters={{userInfo: setUserInfo, jobExperiences: setJobExperiences, educations: setEducations, languages: setUserLanguages, skills: setSkills, courses: setCourses, profiles: setProfiles}} educationLevels={educationLevels} languages={languages} languageLevels={languageLevels}/>} />
+                        <Route path="settings" element={<Settings userInfoSet={userInfo} jobExperiencesSet={jobExperiences} educationsSet={educations} languagesSet={userLanguages} skillsSet={skills} coursesSet={courses} profilesSet={profiles} stateSetters={{userInfo: setUserInfo, jobExperiences: setJobExperiences, educations: setEducations, languages: setUserLanguages, skills: setSkills, courses: setCourses, profiles: setProfiles, profilePicture: setProfilePicture}} educationLevels={educationLevels} languages={languages} languageLevels={languageLevels}/>} />
                     </Routes>
                 </div>
             </div>
