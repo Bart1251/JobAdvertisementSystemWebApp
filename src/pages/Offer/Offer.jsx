@@ -1,22 +1,57 @@
+import { useParams } from "react-router-dom";
 import Navbar from "../../components/Navbar";
 import Actions from "./Actions";
 import Info from "./Info";
 import List from "./List";
 import Map from "./Map";
 import OtherOffers from "./OtherOffers";
+import { useApi } from "../../contexts/ApiContext";
+import { useState, useEffect } from "react";
+import img from "../../assets/react.svg";
 
 export default function Offer() {
+    const { Id } = useParams();
+    const { apiRequest } = useApi();
+    const [offer, setOffer] = useState({});
+    const [companyLogo, setCompanyLogo] = useState(img);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        async function fetchOfferInfo() {
+            const offerData = await apiRequest(`http://127.0.0.1/offerDetail/${Id}`, "GET");
+            const companyLogoData = await apiRequest(`http://127.0.0.1/companyLogo/${offerData.company_id}`, "GET", null, {}, true);
+            
+            if (offerData) {
+                setOffer(offerData);
+                if(companyLogoData)
+                    setCompanyLogo(companyLogoData);
+                setLoading(false);
+            } else {
+                setError("Nie udało się wczytać zawartości strony");
+                setLoading(false);
+            }
+        }
+
+        if (Id) {
+            fetchOfferInfo();
+        }
+    }, [Id]);
+
+    if (loading) return <p>ładowanie</p>;
+    if (error) return <p>Wystąpił problem: {error}</p>;
+
     return (
         <div className="bg-body-secondary min-vh-100">
             <Navbar/>
             <div>
                 <div className="container-md p-md-3 p-0 p-xl-5 d-flex flex-column flex-lg-row justify-content-center gap-4">
                     <div className="col-lg-7 col-12 d-flex flex-column gap-3">
-                        <Info/>
-                        <Map/>
-                        <List title="Twój zakres obowiązków" items={["Układanie towaru na półkach, w lodówkach i ladach chłodniczych", "Zmiana ekspozycji produktów", "Prace pomocnicze na hali sprzedażowej i magazynie"]}/>
-                        <List title="Nasze wymagania" items={["Doskonała organizacja pracy własnej", "Umiejętność budowania długofalowych relacji z klientem", "Wysoki poziom kultury osobistej"]}/>
-                        <List title="To oferujemy" items={["Zatrudnienie w oparciu o umowę o pracę w firmie o ugruntowanej pozycji na rynku", "Szkolenia", "Spotkania integracyjne"]}/>
+                        <Info offer={offer} companyLogo={companyLogo}/>
+                        <Map location={offer.location.split(";")} company={offer.name} address={offer.address}/>
+                        <List title="Twój zakres obowiązków" items={offer.responsibilities.map(e => e.offer_responsibility)}/>
+                        <List title="Nasze wymagania" items={offer.requirements.map(e => e.requirement)}/>
+                        <List title="To oferujemy" items={offer.benefits.map(e => e.benefit)}/>
                     </div>
                     <div className="col-lg-4 col-12 d-flex flex-column gap-3">
                         <Actions/>

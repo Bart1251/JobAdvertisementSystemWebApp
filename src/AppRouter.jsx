@@ -14,7 +14,7 @@ export default function AppRouter() {
     return (
         <Routes>
             <Route index element={<Home/>}/>
-            <Route path='Offer' element={<Offer/>}/>
+            <Route path='Offer/:Id' element={<Offer/>}/>
             <Route path='Profile/*' element={<Profile/>}/>
             <Route path='Login' element={<Login/>}/>
             <Route path='Register' element={<Register/>}/>
