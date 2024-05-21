@@ -21,8 +21,12 @@ export default function Home() {
     const [typeOfOffersDisplayed, setTypeOfOffersDisplayed] = useState(0); // latest 0, last seen 2, most popular 1
 
     async function fetchOffers() {
-        const offersData = await apiRequest(`http://127.0.0.1/offerSearch/${typeOfOffersDisplayed}?${buildQueryParams({...searchSettings, offers_per_page: offersPerPage, page: displayedPage})}`, "GET", null, {}, false, [], true);
-        console.log(offersData);
+        const offersData = await apiRequest(`http://127.0.0.1/offerSearch/${typeOfOffersDisplayed}?${buildQueryParams({...searchSettings, offers_per_page: offersPerPage, page: displayedPage})}`, "GET", null, {}, false, [], false);
+        console.log(offersData)
+        if(offersData) {
+            setDisplayedOffers(offersData.offers);
+            setNumberOfPages(offersData.count / offersPerPage);
+        }
     }
 
     useEffect(() => {
