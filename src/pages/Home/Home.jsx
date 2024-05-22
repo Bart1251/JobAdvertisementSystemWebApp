@@ -55,18 +55,21 @@ export default function Home() {
                 <Banner/>
                 <Search fetchOffers={fetchOffers} searchSettingsSetter={setSearchSettings} searchSettings={searchSettings} searchValues={{categories: categories, jobLevels: jobLevels, jobTypes: jobTypes, typesOfContract: typesOfContract, workShifts: workShifts}}/>
                 <div className="d-flex justify-content-center">
-                    <div className="btn-group" role="group" aria-label="Basic radio toggle button group">
+                    <div className="btn-group d-flex align-items-center" role="group" aria-label="Basic radio toggle button group">
                         <input type="radio" onSelect={() => {setTypeOfOffersDisplayed(0)}} defaultChecked={true} className="btn-check" name="btnradio" id="btnradio1" autoComplete="off"/>
-                        <label className="btn btn-outline-primary rounded-start-pill px-3" htmlFor="btnradio1">Najnowsze</label>
+                        <label className="btn btn-outline-primary rounded-start-pill px-3 h-100" htmlFor="btnradio1">Najnowsze</label>
 
                         <input type="radio" onSelect={() => {setTypeOfOffersDisplayed(1)}} className="btn-check" name="btnradio" id="btnradio2" autoComplete="off"/>
-                        <label className="btn btn-outline-primary px-3" htmlFor="btnradio2">Najpopularniejsze</label>
+                        <label className="btn btn-outline-primary px-3 h-100" htmlFor="btnradio2">Najpopularniejsze</label>
 
                         <input type="radio" onSelect={() => {setTypeOfOffersDisplayed(2)}} className="btn-check" name="btnradio" id="btnradio3" autoComplete="off"/>
                         <label className="btn btn-outline-primary rounded-end-pill px-3" htmlFor="btnradio3">Ostatnio przeglądane</label>
                     </div>
                 </div>
                 <div className="d-flex flex-wrap my-5 m-sm-5">
+                    {displayedOffers.map(e => { return <OfferTile offer={e}/> })}
+                    {displayedOffers.map(e => { return <OfferTile offer={e}/> })}
+                    {displayedOffers.map(e => { return <OfferTile offer={e}/> })}
                     {displayedOffers.map(e => { return <OfferTile offer={e}/> })}
                 </div>
             </div>

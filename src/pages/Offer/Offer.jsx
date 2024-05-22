@@ -48,10 +48,10 @@ export default function Offer() {
                 <div className="container-md p-md-3 p-0 p-xl-5 d-flex flex-column flex-lg-row justify-content-center gap-4">
                     <div className="col-lg-7 col-12 d-flex flex-column gap-3">
                         <Info offer={offer} companyLogo={companyLogo}/>
-                        <Map location={offer.location.split(";")} company={offer.name} address={offer.address}/>
                         <List title="Twój zakres obowiązków" items={offer.responsibilities.map(e => e.offer_responsibility)}/>
                         <List title="Nasze wymagania" items={offer.requirements.map(e => e.requirement)}/>
                         <List title="To oferujemy" items={offer.benefits.map(e => e.benefit)}/>
+                        <Map location={offer.location.split(";")} company={offer.name} address={offer.address}/>
                     </div>
                     <div className="col-lg-4 col-12 d-flex flex-column gap-3">
                         <Actions/>
