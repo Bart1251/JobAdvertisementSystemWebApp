@@ -1,9 +1,10 @@
 import Navbar from "../../components/Navbar"
 import Banner from "./Banner"
-import Search from "../../components/Serach"
+import Search from "./Serach"
 import { useState, useEffect } from "react"
 import OfferTile from "../../components/OfferTile";
 import { useApi } from "../../contexts/ApiContext";
+import PaginationButtons from "./PaginationButtons";
 
 export default function Home() {
     const { apiRequest, buildQueryParams } = useApi();
@@ -25,9 +26,13 @@ export default function Home() {
         console.log(offersData)
         if(offersData) {
             setDisplayedOffers(offersData.offers);
-            setNumberOfPages(offersData.count / offersPerPage);
+            setNumberOfPages(Math.ceil(offersData.count / offersPerPage));
         }
     }
+
+    useEffect(() => {
+        fetchOffers();
+    }, [typeOfOffersDisplayed, displayedPage])
 
     useEffect(() => {
         async function fetchSearchData() {
@@ -54,24 +59,23 @@ export default function Home() {
             <div className="container-md pb-5">
                 <Banner/>
                 <Search fetchOffers={fetchOffers} searchSettingsSetter={setSearchSettings} searchSettings={searchSettings} searchValues={{categories: categories, jobLevels: jobLevels, jobTypes: jobTypes, typesOfContract: typesOfContract, workShifts: workShifts}}/>
-                <div className="d-flex justify-content-center">
+                <div className="d-flex justify-content-center mb-5">
                     <div className="btn-group d-flex align-items-center" role="group" aria-label="Basic radio toggle button group">
-                        <input type="radio" onSelect={() => {setTypeOfOffersDisplayed(0)}} defaultChecked={true} className="btn-check" name="btnradio" id="btnradio1" autoComplete="off"/>
+                        <input type="radio" onChange={() => {setTypeOfOffersDisplayed(0)}} defaultChecked={true} className="btn-check" name="btnradio" id="btnradio1" autoComplete="off"/>
                         <label className="btn btn-outline-primary rounded-start-pill px-3 h-100" htmlFor="btnradio1">Najnowsze</label>
 
-                        <input type="radio" onSelect={() => {setTypeOfOffersDisplayed(1)}} className="btn-check" name="btnradio" id="btnradio2" autoComplete="off"/>
+                        <input type="radio" onChange={() => {setTypeOfOffersDisplayed(1)}} className="btn-check" name="btnradio" id="btnradio2" autoComplete="off"/>
                         <label className="btn btn-outline-primary px-3 h-100" htmlFor="btnradio2">Najpopularniejsze</label>
 
-                        <input type="radio" onSelect={() => {setTypeOfOffersDisplayed(2)}} className="btn-check" name="btnradio" id="btnradio3" autoComplete="off"/>
+                        <input type="radio" onChange={() => {setTypeOfOffersDisplayed(2)}} className="btn-check" name="btnradio" id="btnradio3" autoComplete="off"/>
                         <label className="btn btn-outline-primary rounded-end-pill px-3" htmlFor="btnradio3">Ostatnio przeglądane</label>
                     </div>
                 </div>
-                <div className="d-flex flex-wrap my-5 m-sm-5">
-                    {displayedOffers.map(e => { return <OfferTile offer={e}/> })}
-                    {displayedOffers.map(e => { return <OfferTile offer={e}/> })}
-                    {displayedOffers.map(e => { return <OfferTile offer={e}/> })}
-                    {displayedOffers.map(e => { return <OfferTile offer={e}/> })}
+                <PaginationButtons setDisplayedPage={setDisplayedPage} displayedPage={displayedPage} numberOfPages={numberOfPages}/>
+                <div className="d-flex flex-wrap my-2 m-sm-2">
+                    {displayedOffers.map(e => { return <OfferTile key={e.offer_id} offer={e}/> })}
                 </div>
+                <PaginationButtons setDisplayedPage={setDisplayedPage} displayedPage={displayedPage} numberOfPages={numberOfPages}/>
             </div>
         </div>  
     )

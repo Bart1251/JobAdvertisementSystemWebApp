@@ -1,4 +1,4 @@
-import Dropdown from "./Dropdown"
+import Dropdown from "../../components/Dropdown"
 
 export default function Search({ searchSettings, searchSettingsSetter, searchValues, fetchOffers }) {
 

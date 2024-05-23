@@ -103,7 +103,9 @@ export default function UserInfoSettings({ userInfoSet, userInfoSetter }) {
                 <textarea value={userInfo.current_job_description} onChange={handleUserInfoChange} name="current_job_description" style={{minHeight: 220}} className={`form-control ${userInfoErrors.current_job_description ? 'is-invalid' : ''}`} id="current_job_description"/>
                 {userInfoErrors.current_job_description && <div className="invalid-feedback">{userInfoErrors.current_job_description}</div>}
             </div>
-            <input type="submit" value="Zapisz" className="btn btn-primary col-1 m-3 ms-auto"/>
+            <div className="d-flex justify-content-end mt-3">
+                <input type="submit" value="Zapisz" className="btn btn-primary ms-auto"/>
+            </div>
         </form>
     )
 }
