@@ -33,8 +33,23 @@ export default function Offer() {
             }
         }
 
+        function addToLastSeen() {
+            let lastSeen = JSON.parse(localStorage.getItem("lastSeen")) || [];
+            console.log(lastSeen);
+            if(lastSeen[0] != Id) {
+                lastSeen = lastSeen.filter(e => e != Id);
+                lastSeen.unshift(Id);
+                if (lastSeen.length > 48) {
+                    lastSeen.pop();
+                }
+                localStorage.setItem("lastSeen", JSON.stringify(lastSeen));
+            }
+            console.log(lastSeen);
+        }
+
         if (Id) {
             fetchOfferInfo();
+            addToLastSeen();
         }
     }, [Id]);
 
@@ -54,8 +69,8 @@ export default function Offer() {
                         <Map location={offer.location.split(";")} company={offer.name} address={offer.address}/>
                     </div>
                     <div className="col-lg-4 col-12 d-flex flex-column gap-3">
-                        <Actions/>
-                        <OtherOffers/>
+                        <Actions id={offer.offer_id}/>
+                        <OtherOffers id={offer.offer_id}/>
                     </div>
                 </div>
             </div>

@@ -33,7 +33,7 @@ export default function Documents({ files, setFiles }) {
             }
         }
 
-        const allFiles = await apiRequest(`http://127.0.0.1/file/${user}`, "POST", null, {}, true, files);
+        const allFiles = await apiRequest(`http://127.0.0.1/file/${user}`, "POST", null, {}, false, files);
     
         if(allFiles) {
             setFiles(allFiles);

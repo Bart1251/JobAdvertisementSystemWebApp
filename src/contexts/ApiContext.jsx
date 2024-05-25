@@ -5,7 +5,7 @@ const ApiContext = createContext();
 export const ApiProvider = ({ children }) => {
 
     async function apiRequest(url, method, body = null, headers = {}, isFile = false, files = [], issus = false) {
-        const defaultHeaders = isFile ? {} : { 'Content-Type': 'application/json' };
+        const defaultHeaders = files.length > 0 ? {} : { 'Content-Type': 'application/json' };
         headers = { ...defaultHeaders, ...headers };
 
         const config = {
