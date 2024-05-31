@@ -7,6 +7,7 @@ import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
 import Logout from './pages/Logout/Logout';
 import useAuthTokenRefresher from './hooks/useAuthTokenRefresher';
+import Company from "./pages/Company/Company";
 
 export default function AppRouter() {
     useAuthTokenRefresher();
@@ -16,6 +17,7 @@ export default function AppRouter() {
             <Route index element={<Home/>}/>
             <Route path='Offer/:Id' element={<Offer/>}/>
             <Route path='Profile/*' element={<Profile/>}/>
+            <Route path="Company/*" element={<Company/>}/>
             <Route path='Login' element={<Login/>}/>
             <Route path='Register' element={<Register/>}/>
             <Route path='Logout' element={<Logout/>}/>

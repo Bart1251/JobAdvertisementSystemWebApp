@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from 'react';
-import { Route, Link, Routes } from 'react-router-dom';
+import { Route, Link, Routes, useNavigate } from 'react-router-dom';
 import Navbar from "../../components/Navbar";
 import img from "../../assets/react.svg";
 import ProfileInfo from "./ProfileInfo";
@@ -7,12 +7,14 @@ import SavedOffers from "./SavedOffers";
 import MyApplications from "./MyApplications";
 import Documents from "./Documents";
 import Settings from "./Settings";
+import CreateCompany from "./CreateCompany";
 import { useApi } from '../../contexts/ApiContext';
 import { useUser } from '../../contexts/UserContext';
 
 export default function Profile() {
     const { user } = useUser();
     const { apiRequest } = useApi();
+    const navigateTo = useNavigate();
     const [userInfo, setUserInfo] = useState([]);
     const [jobExperiences, setJobExperiences] = useState([]);
     const [educations, setEducations] = useState([]);
@@ -66,6 +68,8 @@ export default function Profile() {
 
         if (user) {
             fetchUserInfo();
+        } else {
+            navigateTo("/Login");
         }
     }, [user]);
 
@@ -87,6 +91,8 @@ export default function Profile() {
                         <li><Link to={`/Profile/saved`} className="nav-link link-dark"><i className="bi bi-star-fill me-0 me-lg-2 fs-lg-6 fs-3"></i><span className="d-lg-inline d-none">Zapisane</span></Link></li>
                         <li><Link to={`/Profile/applications`} className="nav-link link-dark"><i className="bi bi-send-fill me-0 me-lg-2 fs-lg-6 fs-3"></i><span className="d-lg-inline d-none">Moje aplikacje</span></Link></li>
                         <li><Link to={`/Profile/documents`} className="nav-link link-dark"><i className="bi bi-file-earmark-text-fill me-0 me-lg-2 fs-lg-6 fs-3"></i><span className="d-lg-inline d-none">Dokumenty</span></Link></li>
+                        {!userInfo.company_id && <li><Link to={`/Profile/createCompany`} className="nav-link link-dark"><i className="bi bi-building-add me-0 me-lg-2 fs-lg-6 fs-3"></i><span className="d-lg-inline d-none">Zmień konto na firmowe</span></Link></li>}
+                        {userInfo.company_id && <li><Link to={`/Company`} className="nav-link link-dark"><i className="bi bi-building me-0 me-lg-2 fs-lg-6 fs-3"></i><span className="d-lg-inline d-none">Moja firma</span></Link></li>}
                         <li><Link to={`/Profile/settings`} className="nav-link link-dark"><i className="bi bi-gear-fill me-0 me-lg-2 fs-lg-6 fs-3"></i><span className="d-lg-inline d-none">Ustawienia</span></Link></li>
                         <li><Link to="/Logout" className="nav-link link-dark"><i className="bi bi-box-arrow-left me-0 me-lg-2 fs-lg-6 fs-3"></i><span className="d-lg-inline d-none">Wyloguj się</span></Link></li>
                     </ul>
@@ -97,6 +103,7 @@ export default function Profile() {
                         <Route path="saved" element={<SavedOffers />} />
                         <Route path="applications" element={<MyApplications />} />
                         <Route path="documents" element={<Documents files={files} setFiles={setFiles}/>} />
+                        {!userInfo.company_id && <Route path="createCompany" element={<CreateCompany/>} />}
                         <Route path="settings" element={<Settings userInfoSet={userInfo} jobExperiencesSet={jobExperiences} educationsSet={educations} languagesSet={userLanguages} skillsSet={skills} coursesSet={courses} profilesSet={profiles} stateSetters={{userInfo: setUserInfo, jobExperiences: setJobExperiences, educations: setEducations, languages: setUserLanguages, skills: setSkills, courses: setCourses, profiles: setProfiles, profilePicture: setProfilePicture}} educationLevels={educationLevels} languages={languages} languageLevels={languageLevels}/>} />
                     </Routes>
                 </div>

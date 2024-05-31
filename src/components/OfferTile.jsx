@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import img from "../assets/react.svg";
 import { useApi } from "../contexts/ApiContext";
 import { useUser } from "../contexts/UserContext";
 
 export default function OfferTile({ offer }) {
+    const navigateTo = useNavigate();
     const { apiRequest } = useApi();
     const { user } = useUser();
     const [logo, setLogo] = useState(img);
@@ -13,10 +14,14 @@ export default function OfferTile({ offer }) {
     async function saveOffer(e) {
         e.preventDefault();
         e.stopPropagation();
-        const isSavedData = await apiRequest(`http://127.0.0.1/savedOffers/save/${user}/${offer.offer_id}`, "POST");
-
-        if(isSavedData)
-            setIsSaved(isSavedData.is_offer_saved);
+        if(user) {
+            const isSavedData = await apiRequest(`http://127.0.0.1/savedOffers/save/${user}/${offer.offer_id}`, "POST");
+            
+            if(isSavedData)
+                setIsSaved(isSavedData.is_offer_saved);
+        } else {
+            navigateTo("/Login");
+        }
     }
 
     useEffect(() => {
