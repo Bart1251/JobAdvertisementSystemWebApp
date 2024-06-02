@@ -13,9 +13,7 @@ export default function Navbar() {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNavDropdown">
                     <ul className="navbar-nav w-100 gap-2">
-                        <li className="nav-item me-auto ms-1">
-                            <Link to="/oferty" className="nav-link">Oferty pracy</Link>
-                        </li>
+                        <li className="nav-item me-auto ms-1"></li>
                         {user == null && 
                         <Dropdown text="Moje konto" align="dropdown-menu-end" btnClassName="btn-secondary">
                             <li><Link to="/Login" className="btn rounded-pill w-100 btn-secondary">Zaloguj się</Link></li>

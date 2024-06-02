@@ -77,25 +77,22 @@ export default function ProfileSettings({ profilesSet, profilesSetter }) {
         const [errorsTmp2, hasErrors2] = validateArrayFields(newProfiles, profilesRegexes, profilesMinLengths, profilesMaxLengths, profilesErrorMessages);
         
         if(!hasErrors1 && !hasErrors2) {
-            await Promise.all([
-                profiles.forEach(async se => {
-                    await apiRequest(`http://127.0.0.1/profile/${se.profile_id}`, "PUT", {
-                        link: se.link,
-                    });
-                }),
-                newProfiles.forEach(async se => {
-                    await apiRequest(`http://127.0.0.1/profile`, "POST", {
-                        user_id: user,
-                        link: se.link,
-                    });
-                }),
-                profilesToDelete.forEach(async se => {
-                    await apiRequest(`http://127.0.0.1/profile/${se}`, "DELETE");
-                })
-            ]);
+            profiles.forEach(async se => {
+                await apiRequest(`http://127.0.0.1/profile/${se.profile_id}`, "PUT", {
+                    link: se.link,
+                });
+            }),
+            newProfiles.forEach(async se => {
+                await apiRequest(`http://127.0.0.1/profile`, "POST", {
+                    user_id: user,
+                    link: se.link,
+                });
+            }),
+            profilesToDelete.forEach(async se => {
+                await apiRequest(`http://127.0.0.1/profile/${se}`, "DELETE");
+            })
             const allProfiles = await apiRequest(`http://127.0.0.1/profile/${user}`, "GET");
             profilesSetter(allProfiles);
-            setProfiles(allProfiles);
             setNewProfiles([]);
             setProfilesToDelete([]);
             setProfilesErrors([[], false]);

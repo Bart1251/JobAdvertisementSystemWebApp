@@ -4,7 +4,7 @@ import img from "../assets/react.svg";
 import { useApi } from "../contexts/ApiContext";
 import { useUser } from "../contexts/UserContext";
 
-export default function OfferTile({ offer }) {
+export default function OfferTile({ offer, status }) {
     const navigateTo = useNavigate();
     const { apiRequest } = useApi();
     const { user } = useUser();
@@ -53,9 +53,14 @@ export default function OfferTile({ offer }) {
                     </div>
                 </div>
                 <div className="d-flex align-items-start">
+                    {status != null && status == 0 && <i className={`bi bi-eye-slash fs-3`}></i>}
+                    {status != null && status == 1 && <i className={`bi bi-eye fs-3`}></i>}
+                    {status != null && status == 2 && <i className={`bi bi-check-circle fs-3`}></i>}
+                    {status != null && status == 3 && <i className={`bi bi-x-circle fs-3`}></i>}
+                    {status == null &&
                     <button type="button" onClick={saveOffer} className="bg-light-subtle border-0 p-0 mb-auto">
                         <i className={`bi bi-star${isSaved ? "-fill" : ""} fs-3 ${isSaved ? "text-warning" : ""}`}></i>
-                    </button>
+                    </button>}
                 </div>
             </Link>
         </div>

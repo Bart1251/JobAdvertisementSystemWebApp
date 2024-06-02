@@ -93,7 +93,6 @@ export default function SkillSettings({ skillsSet, skillsSetter }) {
             ]);
             const allSkills = await apiRequest(`http://127.0.0.1/skill/${user}`, "GET");
             skillsSetter(allSkills);
-            setSkills(allSkills);
             setNewSkills([]);
             setSkillsToDelete([]);
             setSkillsErrors([[], false]);

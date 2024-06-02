@@ -134,7 +134,6 @@ export default function EducationSettings({ educationsSet, educationsSetter, edu
             });
             const allEducations = await apiRequest(`http://127.0.0.1/education/${user}`, "GET");
             educationsSetter(allEducations);
-            setEducations(allEducations);
             setNewEducations([]);
             setEducationsToDelete([]);
             setEducationsErrors([[], false]);

@@ -130,7 +130,6 @@ export default function CourseSettings({ coursesSet, coursesSetter }) {
             });
             const allcourses = await apiRequest(`http://127.0.0.1/course/${user}`, "GET");
             coursesSetter(allcourses);
-            setCourses(allcourses);
             setNewCourses([]);
             setCoursesToDelete([]);
             setCoursesErrors([[], false]);

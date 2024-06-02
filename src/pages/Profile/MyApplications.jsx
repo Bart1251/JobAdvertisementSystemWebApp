@@ -10,7 +10,7 @@ export default function MyApplications() {
 
     useEffect(() => {
         async function fetchOffers() {
-            const appliedOffersData = await apiRequest(`http://127.0.0.1/appliedOffers/${user}`, "GET");
+            const appliedOffersData = await apiRequest(`http://127.0.0.1/appliedOffers/user/${user}`, "GET");
 
             if(appliedOffersData)
                 setAppliedOffers(appliedOffersData);
@@ -21,7 +21,7 @@ export default function MyApplications() {
 
     return (
        <div className="m-2 m-lg-5 d-flex flex-wrap">
-            {appliedOffers.map(e => { return <OfferTile key={e.offer_id} offer={e}/> })}
+            {appliedOffers.map(e => { return <OfferTile key={e.offer_id} offer={e} status={e.status}/> })}
        </div> 
     )
 }

@@ -82,7 +82,6 @@ export default function LanguageSettings({ languagesSet, languagesSetter, langua
         });
         const allUserLanguages = await apiRequest(`http://127.0.0.1/userLanguage/${user}`, "GET");
         languagesSetter(allUserLanguages);
-        setUserLanguages(allUserLanguages);
         setNewUserLanguages([]);
         setLanguagesToDelete([]);
     }

@@ -2,6 +2,7 @@ import CompanyInfo from "./CompanyInfo";
 import Offers from "./Offers";
 import Settings from "./Settings";
 import Documents from "../Profile/Documents";
+import Applications from "../Company/Applications";
 import { useApi } from "../../contexts/ApiContext";
 import img from "../../assets/react.svg";
 import { useUser } from "../../contexts/UserContext";
@@ -15,6 +16,12 @@ export default function Company() {
     const [companyInfo, setCompanyInfo] = useState({});
     const [companyLogo, setCompanyLogo] = useState(img);
     const [files, setFiles] = useState([]);
+    const [categories, setCategories] = useState([]);
+    const [jobLevels, setJobLevels] = useState([]);
+    const [jobTypes, setJobTypes] = useState([]);
+    const [typesOfContract, setTypesOfContract] = useState([]);
+    const [workShifts, setWorkShifts] = useState([]);
+    const [offers, setOffers] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -25,12 +32,24 @@ export default function Company() {
                 const companyInfoData = await apiRequest(`http://127.0.0.1/company/${userData.company_id}`, "GET");
                 const logoData = await apiRequest(`http://127.0.0.1/companyLogo/${userData.company_id}`, "GET", null, {}, true);
                 const filesData = await apiRequest(`http://127.0.0.1/file/${user}`, "GET");
-    
+                const categoriesData = await apiRequest(`http://127.0.0.1/category`, "GET");
+                const jobLevelsData = await apiRequest(`http://127.0.0.1/jobLevel`, "GET");
+                const jobtypesData = await apiRequest(`http://127.0.0.1/jobType`, "GET");
+                const typesOfContractData = await apiRequest(`http://127.0.0.1/typeOfContract`, "GET");
+                const workShiftsData = await apiRequest(`http://127.0.0.1/workShift`, "GET");
+                const offersData = await apiRequest(`http://127.0.0.1/companyOffers/${userData.company_id}`, "GET", null, {}, false, [], false);
+
                 if(companyInfoData) {
                     setCompanyInfo(companyInfoData);
                     if(logoData)
                         setCompanyLogo(logoData);
                     setFiles(filesData);
+                    setCategories(categoriesData);
+                    setJobLevels(jobLevelsData);
+                    setJobTypes(jobtypesData);
+                    setTypesOfContract(typesOfContractData);
+                    setWorkShifts(workShiftsData);
+                    setOffers(offersData);
                     setLoading(false);
                 } else {
                     setError("Nie udało się wczytać zawartości strony");
@@ -60,7 +79,8 @@ export default function Company() {
                     <hr className="col-11" />
                     <ul className="nav nav-pills flex-column col-lg-12 col-auto p-3 pt-0">
                         <li><Link to={`/Company`} className="nav-link link-dark"><i className="bi bi-building me-0 me-lg-2 fs-lg-6 fs-3"></i><span className="d-lg-inline d-none">O firmie</span></Link></li>
-                        <li><Link to={`/Company/offers`} className="nav-link link-dark"><i className="bi bi-send-fill me-0 me-lg-2 fs-lg-6 fs-3"></i><span className="d-lg-inline d-none">Ogłoszenia</span></Link></li>
+                        <li><Link to={`/Company/offers`} className="nav-link link-dark"><i className="bi bi-send-fill me-0 me-lg-2 fs-lg-6 fs-3"></i><span className="d-lg-inline d-none">Zarządzanie ofertami</span></Link></li>
+                        <li><Link to={`/Company/applications`} className="nav-link link-dark"><i className="bi bi-mailbox-flag me-0 me-lg-2 fs-lg-6 fs-3"></i><span className="d-lg-inline d-none">Zarządzanie aplikacjami</span></Link></li>
                         <li><Link to={`/Company/documents`} className="nav-link link-dark"><i className="bi bi-file-earmark-text-fill me-0 me-lg-2 fs-lg-6 fs-3"></i><span className="d-lg-inline d-none">Dokumenty</span></Link></li>
                         <li><Link to={`/Company/settings`} className="nav-link link-dark"><i className="bi bi-gear-fill me-0 me-lg-2 fs-lg-6 fs-3"></i><span className="d-lg-inline d-none">Ustawienia</span></Link></li>
                         <li><Link to="/Logout" className="nav-link link-dark"><i className="bi bi-box-arrow-left me-0 me-lg-2 fs-lg-6 fs-3"></i><span className="d-lg-inline d-none">Wyloguj się</span></Link></li>
@@ -69,9 +89,10 @@ export default function Company() {
                 <div className="offset-lg-3 col-lg-9 offset-2 col-10">
                     <Routes>
                         <Route index element={<CompanyInfo info={companyInfo} />} />
-                        <Route path="offers" element={<Offers />} />
+                        <Route path="offers" element={<Offers companyId={companyInfo.company_id} offersSet={offers} offersSetter={setOffers} categories={categories} jobLevels={jobLevels} typesOfContract={typesOfContract} workShifts={workShifts} jobTypes={jobTypes} />} />
                         <Route path="documents" element={<Documents files={files} setFiles={setFiles}/>} />
                         <Route path="settings" element={<Settings companySet={companyInfo} companyLogoSetter={setCompanyLogo} companySetter={setCompanyInfo}/>} />
+                        <Route path="applications" element={<Applications offersSet={offers}/>}/>
                     </Routes>
                 </div>
             </div>

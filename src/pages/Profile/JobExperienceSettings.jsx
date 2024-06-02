@@ -101,7 +101,9 @@ export default function JobExperienceSettings({ jobExperiencesSet, jobExperience
             updatedState[updatedState.findIndex(se => se.id == key)].responsibilities.splice(-(parseInt(e.target.previousElementSibling.getAttribute('data-key')) + 1), 1);
             return updatedState;
         });
+        setNewJobExperienceErrors([[], false]);
         setJobExperienceErrors([[], false]);
+        setJobExperienceNewResponsibilitiesErrors([[], false]);
     }
 
     function deleteResponsibility(e) {
@@ -112,7 +114,9 @@ export default function JobExperienceSettings({ jobExperiencesSet, jobExperience
             setJobExperiencesResponsibilitiesToDelete(prevState => { return [...prevState, parseInt(e.target.previousElementSibling.getAttribute('data-key'))]});
             return updatedState;
         });
+        setNewJobExperienceErrors([[], false]);
         setJobExperienceErrors([[], false]);
+        setJobExperienceNewResponsibilitiesErrors([[], false]);
     }
 
     function deleteJobExperience(e) {
@@ -123,7 +127,9 @@ export default function JobExperienceSettings({ jobExperiencesSet, jobExperience
             updatedState.splice(updatedState.findIndex(se => se.job_experience_id == key), 1);
             return updatedState;
         });
+        setNewJobExperienceErrors([[], false]);
         setJobExperienceErrors([[], false]);
+        setJobExperienceNewResponsibilitiesErrors([[], false]);
     }
 
     function deleteNewJobExperienceResponsibility(e) {
@@ -134,6 +140,8 @@ export default function JobExperienceSettings({ jobExperiencesSet, jobExperience
             return updatedState;
         });
         setNewJobExperienceErrors([[], false]);
+        setJobExperienceErrors([[], false]);
+        setJobExperienceNewResponsibilitiesErrors([[], false]);
     }
 
     function deleteNewJobExperience(e) {
@@ -144,6 +152,8 @@ export default function JobExperienceSettings({ jobExperiencesSet, jobExperience
             return updatedState;
         });
         setNewJobExperienceErrors([[], false]);
+        setJobExperienceErrors([[], false]);
+        setJobExperienceNewResponsibilitiesErrors([[], false]);
     }
 
     function findKey(parent) {
@@ -158,17 +168,17 @@ export default function JobExperienceSettings({ jobExperiencesSet, jobExperience
         company: /^[A-Za-ząćęłńóśźżĄĆĘŁŃÓŚŹŻ]+(?:[-' ][A-Za-z]+)*$/,
         location: /^[A-Za-ząćęłńóśźżĄĆĘŁŃÓŚŹŻ0-9\s,'-]+$/,
         period_of_employment_start: /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/,
-        responsibilities: { responsibility: /^[\w\s.,!?;:'"-]{1,300}$/ },
+        responsibilities: { responsibility: /^[\w\s.,!?;:\'"-ąćęłńóśźżĄĆĘŁŃÓŚŹŻ]{1,300}$/ },
     };
     const newJobExperienceRegexes = {
         position: /^[A-Za-ząćęłńóśźżĄĆĘŁŃÓŚŹŻ]+(?:[-' ][A-Za-z]+)*$/,
         company: /^[A-Za-ząćęłńóśźżĄĆĘŁŃÓŚŹŻ]+(?:[-' ][A-Za-z]+)*$/,
         location: /^[A-Za-ząćęłńóśźżĄĆĘŁŃÓŚŹŻ0-9\s,'-]+$/,
         period_of_employment_start: /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/,
-        responsibilities: /^[\w\s.,!?;:'"-]{1,300}$/,
+        responsibilities: /^[\w\s.,!?;:\'"-ąćęłńóśźżĄĆĘŁŃÓŚŹŻ]{1,300}$/,
     };
     const jobExperienceNewResponsibilitiesRegexes = {
-        responsibilities: /^[\w\s.,!?;:'"-]{1,300}$/,
+        responsibilities: /^[\w\s.,!?;:\'"-ąćęłńóśźżĄĆĘŁŃÓŚŹŻ]{1,300}$/,
     }
     const jobExperienceMinLenghts = {
         position: 5, company: 5, location: 5, period_of_employment_start: 0, responsibilities: { responsibility: 2 },
@@ -250,7 +260,6 @@ export default function JobExperienceSettings({ jobExperiencesSet, jobExperience
             });
             const allJobExperiences = await apiRequest(`http://127.0.0.1/jobExperience/${user}`, "GET");
             jobExperiencesSetter(allJobExperiences);
-            setJobExperiences(allJobExperiences);
             setJobExperienceNewResponsibilities(allJobExperiences.map(e => {return {id: e.job_experience_id, responsibilities: []}}))
             setNewJobExperiences([]);
             setJobExperiencesToDelete([]);

@@ -30,7 +30,7 @@ export const ValidationProvider = ({ children }) => {
                         errors[field][i] = newErrors;
                         hasErrors = (newHasErrors == true ? newHasErrors : hasErrors);
                     } else {
-                        if (!regexes[field].test(fields[field][i]) || fields[field][i].length < minLenghts[field] || fields[field][i].length > maxLenghts[field]) {
+                        if (!regexes[field].test(fields[field][i]) || fields[field][i].toString().length < minLenghts[field] || fields[field][i].toString().length > maxLenghts[field]) {
                             errors[field][i] = messages[field];
                             hasErrors = true;
                         }
@@ -39,7 +39,7 @@ export const ValidationProvider = ({ children }) => {
                     }
                 });
             } else {
-                if (!regexes[field].test(fields[field]) || fields[field].length < minLenghts[field] || fields[field].length > maxLenghts[field]) {
+                if (!regexes[field].test(fields[field]) || fields[field].toString().length < minLenghts[field] || fields[field].toString().length > maxLenghts[field]) {
                     errors[field] = messages[field];
                     hasErrors = true;
                 }
